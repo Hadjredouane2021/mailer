@@ -1,0 +1,9 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+.env.local
+data/*
+!data/seed/
+!data/uploads/
+public/app/

@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: mailler-studio-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?définir DB_PASSWORD dans .env}
+      MYSQL_DATABASE: ${DB_NAME:-mail}
+    ports:
+      - "127.0.0.1:${DB_PORT:-3306}:3306"
+    volumes:
+      - mailler_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_PASSWORD:?définir DB_PASSWORD dans .env}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    image: node:22
+    container_name: mailler-studio-api
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- -H 0.0.0.0"
+    env_file:
+      - ./backend/.env.local
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "0.0.0.0:4100:4100"
+    volumes:
+      - ./backend:/app
+      - mailler_api_node_modules:/app/node_modules
+      - mailler_api_next:/app/.next
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mailler_db_data:
+  mailler_api_node_modules:
+  mailler_api_next:

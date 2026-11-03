@@ -1,0 +1,29 @@
+{
+  "name": "mailler-studio-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API Next.js de Mailler Studio : MySQL (base mail) + SMTP (PHPMailer -> nodemailer)",
+  "scripts": {
+    "dev": "next dev -p 4100",
+    "build": "next build",
+    "start": "next start -p 4100",
+    "build:app": "node scripts/build-app.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "mysql2": "^3.24.6",
+    "next": "^16.4.1",
+    "nodemailer": "^10.1.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.2.6",
+    "@types/node": "^26.6.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}

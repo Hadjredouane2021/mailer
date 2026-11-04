@@ -32,7 +32,7 @@ export interface Settings {
 }
 
 /** Expéditeurs autorisés par défaut (MAIL_SENDERS dans .env.local pour en changer). */
-const DEFAULT_SENDERS = ['newsletter@fma.org.ma', 'inscription@rdvdelassurance.ma'];
+const DEFAULT_SENDERS = ['newsletter@fma.org.ma', 'inscription@rdvdelassurance.ma', 'information@rdvdelassurance.ma'];
 
 function normalizeSenders(list: string[], fromEmail: string): string[] {
   const clean = list.map((s) => s.trim().toLowerCase()).filter((s) => s !== '');
